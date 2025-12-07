@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { envConfiguration } from './config/env.config';
+import { ProductsModule } from './products/products.module';
 
 
 @Module({
@@ -17,8 +18,13 @@ import { envConfiguration } from './config/env.config';
       autoLoadEntities: true,
       synchronize: envConfiguration().environment != 'prod' ? true : false,
     }),
+    ProductsModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule { 
+  constructor() { 
+    console.log('DB Host: ', envConfiguration());
+  }
+}
