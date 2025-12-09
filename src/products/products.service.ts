@@ -43,9 +43,9 @@ export class ProductsService {
     return `This action updates a #${id} product`;
   }
 
-  remove(id: string) {
-    const product = this.productsRepository.delete({ id });
-    return product;
+  async remove(id: string) {
+    const product = await this.findOne(id);
+    return await this.productsRepository.remove(product);
   }
 
   private handleDBExceptions(error: any) {
