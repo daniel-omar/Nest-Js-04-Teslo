@@ -34,4 +34,9 @@ export class CreateProductDto {
     @IsString()
     @MinLength(1)
     gender: string;
+
+    @IsOptional()
+    @IsArray()
+    @IsString({ each: true })
+    tags: string[];
 }
